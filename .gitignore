@@ -1,0 +1,54 @@
+# Datos
+data/raw/*.dta
+data/processed/*
+!data/processed/.gitkeep
+!data/raw/.gitkeep
+!data/raw/README.md
+!data/geo/.gitkeep
+!data/geo/README.md
+
+# R data files
+*.rds
+*.RData
+
+# Resultados generados (reproducibles desde src/)
+# results/figures/*
+# results/tables/*
+# (descomentar si preferís no commitear outputs derivables)
+
+# Secrets / entorno
+.env
+*.env
+credentials.json
+*.key
+*.pem
+
+# OS / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj.user/
+
+# LaTeX auxiliares
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
