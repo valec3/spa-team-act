@@ -1,6 +1,8 @@
 # spatial_poverty_lima
 
 > **Tipo:** Paper original  
+> **Autores:** Maye Mamani, V.R.; Mulluni Cándia, J.J.; Maquera, J.S.E.; Choque Zuñiga, C.N.  
+> **Afiliación:** Universidad Nacional del Altiplano, Facultad de Ingeniería Estadística e Informática, Puno, Perú  
 > **Dataset:** CPV 2017 (INEI), 128 distritos de Lima Metropolitana  
 > **Métodos:** PCA → Socioeconomic Level Index (SELI), Moran I Global, LISA  
 > **Parámetros:** Queen contiguity orden 1, 999 Monte Carlo permutations, α = 0.05  
