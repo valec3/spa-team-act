@@ -46,9 +46,13 @@
 \title{\textbf{Spatial Autocorrelation of Multidimensional Socioeconomic\\Deprivation across Metropolitan Lima, Peru:\\Evidence from Census Data}}
 
 \author{%
-  [Authors]\\[4pt]
-  \small [Affiliation]\\[4pt]
-  \small E-mail: [corresponding.author@university.edu.pe]
+  V\'ictor R.\ Maye Mamani\,\textsuperscript{1},
+  Jos\'e J.\ Mulluni C\'andia\,\textsuperscript{1},\\[2pt]
+  Julio S.\ E.\ Maquera\,\textsuperscript{1},
+  Clever N.\ Choque Zu\~niga\,\textsuperscript{1} \\[6pt]
+  \small \textsuperscript{1} Facultad de Ingenier\'ia Estad\'istica e Inform\'atica,\\
+  \small Universidad Nacional del Altiplano, Puno, Per\'u \\[4pt]
+  \small E-mail: \texttt{\{vmaye, jmulluni, jedu, ccho\}@est.unap.edu.pe}
 }
 
 \date{}
@@ -62,40 +66,31 @@
 % ===========================================================================
 \begin{abstract}
 \noindent
-\textbf{Purpose:} This study investigates the spatial distribution and clustering patterns
-of multidimensional socioeconomic deprivation across 128 districts of Metropolitan Lima,
-Peru, using the 2017 National Population and Housing Census. Despite extensive research
-on spatial inequality in Latin America, subnational analyses at the intra-departmental
-level remain scarce.
-
-\noindent
-\textbf{Methods:} A composite Socioeconomic Level Index (SELI) was constructed via
-Principal Component Analysis (PCA) incorporating education, housing quality, and access
-to basic services. Spatial autocorrelation was assessed using Global Moran's~$I$ with
-Queen contiguity weights (order~1), while Local Indicators of Spatial Association (LISA)
-identified statistically significant clusters. Inference was based on 999 Monte Carlo
-permutations ($\alpha = 0.05$).
-
-\noindent
-\textbf{Results:} The SELI exhibited strong positive spatial autocorrelation
-($I = 0.53$, $Z = 9.45$, $p < .001$), confirming that districts with similar
-socioeconomic conditions tend to cluster geographically. LISA analysis revealed that
-21.1\% of districts formed High-High clusters concentrated in central Lima, while
-17.2\% formed Low-Low clusters in the northern and southern periphery. Only 5.5\%
-of districts exhibited spatial outliers (High-Low or Low-High).
-
-\noindent
-\textbf{Conclusions:} The findings provide robust evidence of spatial segregation of
-socioeconomic conditions within a major Latin American metropolis. The concentration
-of deprivation in peripheral districts highlights spatial dimensions that should inform
-territorially-targeted social policies. The PCA-Moran-LISA methodological framework is
-replicable across other Peruvian departments and comparable to recent studies in
-Colombia, Turkey, and Indonesia.
+This study investigates the spatial distribution and clustering patterns of
+multidimensional socioeconomic deprivation across 128 districts of Metropolitan
+Lima, Peru, using the 2017 National Population and Housing Census. A composite
+Socioeconomic Level Index (SELI) was constructed via Principal Component Analysis
+(PCA) incorporating education, housing quality, and access to basic services.
+Spatial autocorrelation was assessed using Global Moran's~$I$ with Queen contiguity
+weights (order~1), while Local Indicators of Spatial Association (LISA) identified
+statistically significant clusters based on 999 Monte Carlo permutations
+($\alpha = 0.05$). The SELI exhibited strong positive spatial autocorrelation
+($I = 0.53$, $Z = 9.45$, $p = .001$), while educational indicators showed weaker
+but significant clustering (ECE Mathematics $I = 0.18$, $Z = 3.26$, $p = .004$;
+ECE Language $I = 0.11$, $Z = 2.01$, $p = .050$). LISA analysis identified 6.3\%
+of districts as High-High clusters concentrated in central Lima and 13.3\% as
+Low-Low clusters in the peripheral and highland provinces, with 79.7\% showing
+non-significant local spatial association. A comparison with national-level
+evidence revealed substantial attenuation of spatial autocorrelation at the
+intra-departmental scale, particularly for educational achievement indicators
+($\Delta I = -0.32$ to $-0.46$). The concentration of deprivation in peripheral
+districts underscores the need for territorially-targeted social policies that
+account for the spatial dimensions of inequality within metropolitan areas.
 
 \vspace{6pt}
 \noindent\textbf{Keywords:} spatial autocorrelation \textbullet\ Moran's~$I$
 \textbullet\ LISA \textbullet\ multidimensional poverty \textbullet\ socioeconomic
-deprivation \textbullet\ census data \textbullet\ Metropolitan Lima \textbullet\ Peru
+deprivation \textbullet\ Metropolitan Lima
 \end{abstract}
 
 \newpage
@@ -462,14 +457,12 @@ within the department.
   \end{tabular}
 \end{table}
 
-The PCA yielded a first principal component that explained approximately 72\% of
-the total variance, with all four input variables loading positively and
-substantially on the component (loadings: 0.82--0.91). Bartlett's test of
-sphericity was significant ($\chi^2(6) = 312.45$, $p < .001$), rejecting the
-null hypothesis that the correlation matrix is an identity matrix. The KMO
-measure of sampling adequacy was 0.78, indicating that the data were suitable
-for PCA. The resulting SELI was standardised to mean zero and unit variance,
-with higher values indicating better socioeconomic conditions.
+The PCA yielded a first principal component that explained 68.7\% of
+the total variance, with all input variables loading positively on the component. The resulting SELI was standardised to mean zero and unit
+variance, with higher values indicating better socioeconomic conditions. The
+spatial weights matrix yielded a mean of 5.1 neighbours per district
+(range: 1--12, median: 5), comparable to the 5.0 mean neighbours reported
+in the national-level analysis.
 
 \subsection{Global Spatial Autocorrelation}
 
@@ -478,22 +471,27 @@ SELI and supplementary poverty indicators.
 
 \begin{table}[htbp]
   \centering
+  \footnotesize
   \caption{Global Moran's~$I$ for Socioeconomic Indicators, Metropolitan Lima
            ($N = 128$, Queen order-1 weights, 999 MC permutations)}
   \label{tab:moran_global}
-  \begin{tabular}{lrrrrr}
+  \begin{tabular}{lrrrr}
     \toprule
-    Variable & $I$ & $E[I]$ & $Z$ & $p$ (MC) & \textit{Perms} \\
+    Variable & $I$ & $E[I]$ & $Z$ & $p$ (MC) \\
     \midrule
-    SELI (PCA)                    & 0.5296 & $-$0.0078 & 9.45 & .001 & 999 \\
-    Total poverty 2018            & 0.5300 & $-$0.0079 & 9.44 & .001 & 999 \\
-    Extreme poverty 2018          & 0.4870 & $-$0.0078 & 8.67 & .001 & 999 \\
-    Avg.\ years of schooling      & 0.4420 & $-$0.0079 & 7.88 & .001 & 999 \\
-    Basic services access         & 0.5120 & $-$0.0078 & 9.12 & .001 & 999 \\
+    SELI (PCA)          & 0.5296 & $-$0.0079 & 9.45 & .001 \\
+    Total poverty 2013  & 0.5300 & $-$0.0079 & 9.44 & .001 \\
+    ECE Mathematics     & 0.1774 & $-$0.0079 & 3.26 & .004 \\
+    ECE Language        & 0.1063 & $-$0.0079 & 2.01 & .050 \\
     \bottomrule
-    \multicolumn{6}{l}{\footnotesize \textit{Note.}\ $E[I] = -1/(n-1)$ under
-    the null of spatial randomness. Monte Carlo $p$-value is $(M+1)/(R+1)$.} \\
   \end{tabular}
+
+  \vspace{4pt}
+  \begin{minipage}{0.9\textwidth}
+  \footnotesize\textit{Note.}\ $E[I] = -1/(n-1)$ under the null of spatial
+  randomness. Monte Carlo $p$-value is $(M+1)/(R+1)$.
+  ECE = Student Census Evaluation, district-level scores.
+  \end{minipage}
 \end{table}
 
 All variables exhibited positive and statistically significant spatial
@@ -518,7 +516,7 @@ the spatial distribution of statistically significant local associations.
 
 \begin{figure}[htbp]
   \centering
-  % \includegraphics[width=0.85\textwidth]{lisa_seli_map.png}
+  \includegraphics[width=0.85\textwidth]{../../results/figures/lisa_mapa_NSE.png}
   \caption{LISA cluster map for the Socioeconomic Level Index (SELI) across
            128 districts of Metropolitan Lima. HH~=~High-High clusters;
            LL~=~Low-Low clusters; HL~=~High-Low spatial outliers;
@@ -527,58 +525,133 @@ the spatial distribution of statistically significant local associations.
   \label{fig:lisa_seli}
 \end{figure}
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{../../results/figures/lisa_mapa_pobreza.png}
+  \caption{LISA cluster map for the Poverty 2013 indicator across
+           128 districts of Metropolitan Lima.}
+  \label{fig:lisa_pobreza}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.78\textwidth]{../../results/figures/moran_scatter_NSE.png}
+  \caption{Moran scatterplot for the Socioeconomic Level Index (SELI).
+           Horizontal axis: standardised SELI ($z_i$). Vertical axis: spatial
+           lag ($Wz_i$). The slope of the regression line equals the Global
+           Moran's~$I$ ($I = 0.53$). Quadrants: AA~=~High-High,
+           BB~=~Low-Low, AB~=~High-Low, BA~=~Low-High.}
+  \label{fig:scatter_nse}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.78\textwidth]{../../results/figures/moran_scatter_pobreza.png}
+  \caption{Moran scatterplot for the Poverty 2013 indicator ($I = 0.53$).}
+  \label{fig:scatter_pobreza}
+\end{figure}
+
 Table~\ref{tab:lisa_freq} summarises the frequency distribution of LISA
 categories across the 128 districts.
 
 \begin{table}[htbp]
   \centering
-  \caption{Distribution of LISA Clusters for SELI, Metropolitan Lima
+  \footnotesize
+  \caption{Distribution of LISA Clusters for SELI and Poverty, Metropolitan Lima
            ($N = 128$ districts)}
   \label{tab:lisa_freq}
-  \begin{tabular}{lrr}
+  \begin{tabular}{lrrrr}
     \toprule
-    LISA Category & $n$ & \% \\
+    LISA Category & \multicolumn{2}{c}{SELI (PCA)} & \multicolumn{2}{c}{Poverty 2013} \\
+    & $n$ & \% & $n$ & \% \\
     \midrule
-    High-High (HH)    & 27 & 21.1 \\
-    Low-Low (LL)      & 22 & 17.2 \\
-    High-Low (HL)     & 3  & 2.3  \\
-    Low-High (LH)     & 2  & 1.6  \\
-    Not significant   & 74 & 57.8 \\
+    High-High (HH)    & 8  & 6.3  & 14 & 10.9 \\
+    Low-Low (LL)      & 17 & 13.3 & 11 & 8.6  \\
+    High-Low (HL)     & 1  & 0.8  & 0  & 0.0  \\
+    Low-High (LH)     & 0  & 0.0  & 0  & 0.0  \\
+    Not significant   & 102 & 79.7 & 103 & 80.5 \\
     \midrule
-    Total             & 128 & 100.0 \\
+    Total             & 128 & 100.0 & 128 & 100.0 \\
     \bottomrule
   \end{tabular}
+
+  \vspace{4pt}
+  \begin{minipage}{0.9\textwidth}
+  \footnotesize\textit{Note.}\ Significance at $p < .05$ with 999 Monte Carlo
+  permutations. SELI~=~Socioeconomic Level Index.
+  \end{minipage}
 \end{table}
 
-\textbf{High-High clusters} ($n = 27$, 21.1\% of districts) were predominantly
-located in the central and western areas of Lima Province, corresponding to
-districts with historically higher levels of economic development, better
-infrastructure, and greater access to public services. These include districts
-such as San Isidro, Miraflores, San Borja, La Molina, and Santiago de Surco.
+\textbf{High-High clusters} for the SELI ($n = 8$, 6.3\% of districts) were
+located in the central areas of Lima Province, corresponding to districts with
+historically higher levels of economic development, better infrastructure, and
+greater access to public services, including San Isidro, Miraflores, and San
+Borja. For the poverty indicator, 14 districts (10.9\%) formed High-High clusters
+of high poverty concentration, predominantly in the northern periphery and
+highland provinces.
 
-\textbf{Low-Low clusters} ($n = 22$, 17.2\%) were concentrated in two distinct
-geographic zones: (a) the northern periphery of Lima Province, including districts
-in the Cono Norte such as Ancón, Santa Rosa, and parts of Carabayllo and Comas,
-and (b) the southern and highland provinces of the department, particularly in
-Yauyos, Cajatambo, and Oyón. These areas are characterised by lower population
-density, limited infrastructure connectivity, and economies based on subsistence
-agriculture.
+\textbf{Low-Low clusters} for the SELI ($n = 17$, 13.3\%) were concentrated in
+two geographic zones: (a) the northern periphery of Lima Province (districts in
+the Cono Norte such as Ancón and Santa Rosa), and (b) the southern and highland
+provinces of the department (Yauyos, Cajatambo, Oyón). These areas are
+characterised by lower population density, limited infrastructure connectivity,
+and economies based on subsistence agriculture. For poverty, 11 districts (8.6\%)
+formed Low-Low clusters—areas with low poverty surrounded by similarly low-poverty
+neighbours—concentrated in central Lima.
 
-\textbf{High-Low spatial outliers} ($n = 3$, 2.3\%) included district-level
-economic centres in otherwise deprived regions, where relatively better
-socioeconomic conditions coexist with surrounding districts of lower status.
+\textbf{Spatial outliers} were rare. Only one High-Low outlier was detected for the
+SELI (0.8\%), and no Low-High outliers were identified for either variable, suggesting
+that socioeconomic transition zones within Metropolitan Lima are narrow. Districts tend
+to be surrounded by similarly-classified neighbours.
 
-\textbf{Low-High spatial outliers} ($n = 2$, 1.6\%) represented pockets of
-deprivation embedded within relatively affluent areas, potentially corresponding
-to informal settlements or districts with high concentrations of recent
-internal migrants.
+The high proportion of non-significant local associations (79.7\% for SELI,
+80.5\% for poverty) indicates that the majority of districts do not exhibit
+statistically detectable local spatial clustering, consistent with the
+national-level results of \citet{alonso2025segregacion}, who reported 62\%
+non-significant districts. This substantial share of non-significant associations
+suggests considerable within-department heterogeneity that is not captured by
+aggregate spatial measures.
 
-The proportion of non-significant local associations (57.8\%) is higher than
-the proportion of significant clusters, indicating that a substantial share
-of districts in Metropolitan Lima exhibit socioeconomic conditions that are
-not strongly differentiated from their neighbours in a statistically detectable
-way. This finding mirrors the national-level results of \citet{alonso2025segregacion},
-who reported 62\% non-significant districts in their analysis.
+\subsection{Comparison with National-Level Evidence}
+
+Table~\ref{tab:comparison} compares the Global Moran's~$I$ results from this study
+with those reported by \citet{alonso2025segregacion} for their national-level
+analysis of 1,781 Peruvian districts.
+
+\begin{table}[htbp]
+  \centering
+  \footnotesize
+  \caption{Comparison of Global Moran's~$I$: Metropolitan Lima (this study)
+           vs.\ National-Level Analysis (Alonso-Pastor et al., 2025)}
+  \label{tab:comparison}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Indicator & \multicolumn{1}{c}{Lima} & \multicolumn{1}{c}{National} & $\Delta$ & \% Change \\
+    \midrule
+    Socioeconomic Index  & 0.5296 & 0.6584 & $-$0.1288 & $-$19.6 \\
+    Language achievement  & 0.1063 & 0.5650 & $-$0.4587 & $-$81.2 \\
+    Mathematics achievement & 0.1774 & 0.5005 & $-$0.3231 & $-$64.6 \\
+    \midrule
+    $N$ (districts) & 128 & 1,781 & --- & --- \\
+    Mean neighbours & 5.1 & 5.0 & --- & --- \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{4pt}
+  \begin{minipage}{0.92\textwidth}
+  \footnotesize\textit{Note.} All $I$ values significant at $p < .05$
+  (999 MC permutations). $\Delta = I_{\text{Lima}} - I_{\text{National}}$.
+  National values from Alonso-Pastor et al.\ (2025, Cuadro~1).
+  \end{minipage}
+\end{table}
+
+The attenuation of spatial autocorrelation at the subnational scale is consistent
+across all indicators. The socioeconomic index shows a 19.7\% reduction, which is
+moderate and expected given the narrower range of variation within a single
+department. However, the attenuation is substantially larger for educational
+achievement indicators (64--81\%), suggesting that the spatial structure of
+educational outcomes differs markedly between national and intra-departmental
+scales---a finding that warrants further investigation with student-level data.
 
 \subsection{Robustness Checks}
 
@@ -621,10 +694,10 @@ of Latin American metropolises, where colonial-era urban centres evolved into
 modern central business districts, while rural-to-urban migration during the
 twentieth century generated informal settlements in peripheral areas
 \citep{gonzalez2025pobreza}. The LISA results reveal that this pattern persists
-in contemporary Lima, with 38.3\% of districts belonging to significant clusters
-(HH or LL).
+in contemporary Lima, with 19.5\% of districts belonging to significant clusters
+(HH or LL) for the SELI, and 20.3\% clustering in the same direction for poverty.
 
-The relatively low proportion of spatial outliers (3.9\% combined HL and LH)
+The very low proportion of spatial outliers (0.8\% for SELI, 0.0\% for poverty)
 suggests that socioeconomic transition zones are narrow. Districts tend to be
 surrounded by similarly-classified neighbours, which may reflect the operation
 of housing markets (sorting by income), the spatial organisation of public
