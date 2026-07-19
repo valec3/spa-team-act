@@ -1,0 +1,212 @@
+# Method Library — spa-team-act
+# Registro de métodos de análisis reusables.
+# Cada método es un módulo independiente con: descripción, parámetros,
+# inputs/outputs, implementación, tests, y ejemplos de uso.
+
+version: "1.0"
+last_updated: "2024-07-18"
+
+methods:
+
+  - id: moran_global
+    name: "Índice Global de Moran"
+    category: "spatial_analysis"
+    description: >
+      Calcula el I de Moran global para evaluar autocorrelación espacial.
+      Soporta matrices Queen/Rook/KNN, estandarización por filas, e inferencia
+      por permutaciones Monte Carlo.
+    parameters:
+      - name: "weight_matrix"
+        type: "enum[queen, rook, knn]"
+        default: "queen"
+      - name: "order"
+        type: "integer"
+        default: 1
+      - name: "standardization"
+        type: "enum[row, none]"
+        default: "row"
+      - name: "nsim"
+        type: "integer"
+        default: 999
+      - name: "alpha"
+        type: "float"
+        default: 0.05
+      - name: "seed"
+        type: "integer"
+        default: 20240101
+    inputs:
+      - name: "spatial_data"
+        type: "sf object"
+        description: "Objeto sf con geometría y variable de interés"
+      - name: "variable"
+        type: "character"
+        description: "Nombre de la variable a analizar"
+      - name: "id_column"
+        type: "character"
+        default: "UBIGEO"
+        description: "Columna de identificación única"
+    outputs:
+      - name: "moran_result"
+        type: "list"
+        description: "Lista con I, E[I], Z, p-value, nsim"
+      - name: "moran_table"
+        type: "data.frame"
+        description: "Tabla resumen en formato publicable"
+    implementation: "methods/spatial_analysis/moran_global.R"
+    tests: "methods/spatial_analysis/tests/test_moran_global.R"
+    dependencies:
+      r_packages: ["spdep", "sf"]
+    references:
+      - "Moran, P.A.P. (1950). Notes on continuous stochastic phenomena. Biometrika."
+      - "Anselin, L. (1995). Local Indicators of Spatial Association—LISA. Geographical Analysis."
+    examples:
+      - paper: "papers/replica_lima"
+        usage: "I de Moran para NSE, Pobreza, ECE en 128 distritos de Lima"
+
+  - id: lisa
+    name: "Local Indicators of Spatial Association (LISA)"
+    category: "spatial_analysis"
+    description: >
+      Calcula indicadores locales de asociación espacial (LISA) que descomponen
+      el I de Moran global. Clasifica unidades en clusters AA, BB, AB, BA, y
+      genera mapas de significancia.
+    parameters:
+      - name: "nsim"
+        type: "integer"
+        default: 999
+      - name: "alpha"
+        type: "float"
+        default: 0.05
+      - name: "adjustment"
+        type: "enum[none, bonferroni, sidak]"
+        default: "none"
+      - name: "seed"
+        type: "integer"
+        default: 20240101
+    inputs:
+      - name: "spatial_data"
+        type: "sf object"
+        description: "Objeto sf con geometría y variable de interés"
+      - name: "weight_matrix"
+        type: "listw"
+        description: "Matriz de pesos espaciales"
+      - name: "variable"
+        type: "character"
+    outputs:
+      - name: "lisa_result"
+        type: "list"
+        description: "Lista con I local, p-values, clusters, quadrantes"
+      - name: "lisa_map"
+        type: "ggplot"
+        description: "Mapa de clusters LISA"
+      - name: "lisa_table"
+        type: "data.frame"
+        description: "Tabla de frecuencias por tipo de cluster"
+    implementation: "methods/spatial_analysis/lisa.R"
+    tests: "methods/spatial_analysis/tests/test_lisa.R"
+    dependencies:
+      r_packages: ["spdep", "sf", "ggplot2"]
+    references:
+      - "Anselin, L. (1995). Local Indicators of Spatial Association—LISA. Geographical Analysis."
+
+  - id: pca_socioeconomic
+    name: "PCA para Índice Socioeconómico"
+    category: "pca"
+    description: >
+      Construye un índice socioeconómico mediante Análisis de Componentes
+      Principales. Incluye selección de variables, estandarización, rotación,
+      y validación (KMO, Bartlett).
+    parameters:
+      - name: "rotation"
+        type: "enum[none, varimax, oblimin]"
+        default: "varimax"
+      - name: "retention"
+        type: "enum[eigenvalue, parallel, variance]"
+        default: "eigenvalue"
+      - name: "eigenvalue_threshold"
+        type: "float"
+        default: 1.0
+      - name: "standardize"
+        type: "boolean"
+        default: true
+    inputs:
+      - name: "data"
+        type: "data.frame"
+        description: "Variables socioeconómicas a incluir en el PCA"
+      - name: "variables"
+        type: "character vector"
+        description: "Nombres de las columnas a usar"
+    outputs:
+      - name: "pca_model"
+        type: "prcomp/principal"
+      - name: "index"
+        type: "numeric vector"
+        description: "Índice socioeconómico estandarizado (Z-score)"
+      - name: "loadings_table"
+        type: "data.frame"
+      - name: "scree_plot"
+        type: "ggplot"
+      - name: "validation"
+        type: "list"
+        description: "KMO, Bartlett test, varianza explicada"
+    implementation: "methods/pca/pca_socioeconomic.R"
+    tests: "methods/pca/tests/test_pca.R"
+    dependencies:
+      r_packages: ["psych", "ggplot2"]
+    references:
+      - "Vyas, S. & Kumaranayake, L. (2006). Constructing socio-economic status indices. Health Policy and Planning."
+
+  - id: descriptive_stats
+    name: "Estadísticos Descriptivos"
+    category: "descriptive"
+    description: >
+      Calcula y formatea estadísticos descriptivos para publicación.
+      Tabla APA 7 con N, M, SD, Min, Max, Asimetría, Curtosis.
+    parameters:
+      - name: "format"
+        type: "enum[apa, standard, extended]"
+        default: "apa"
+      - name: "digits"
+        type: "integer"
+        default: 2
+    inputs:
+      - name: "data"
+        type: "data.frame"
+      - name: "variables"
+        type: "character vector"
+      - name: "group_by"
+        type: "character"
+        required: false
+    outputs:
+      - name: "descriptives_table"
+        type: "data.frame"
+        description: "Tabla formateada APA 7"
+    implementation: "methods/descriptive/descriptive_stats.R"
+    dependencies:
+      r_packages: ["dplyr", "tidyr", "psych"]
+
+  - id: method_comparison
+    name: "Tabla de Comparación Metodológica"
+    category: "templates"
+    description: >
+      Genera tabla comparativa de métodos entre estudio original y réplica.
+      Columnas: Aspecto, Original, Réplica, Justificación.
+    parameters:
+      - name: "output_format"
+        type: "enum[latex, markdown, csv]"
+        default: "latex"
+    inputs:
+      - name: "original_methods"
+        type: "list"
+        description: "Parámetros del estudio original"
+      - name: "replica_methods"
+        type: "list"
+        description: "Parámetros de la réplica"
+      - name: "justifications"
+        type: "list"
+        description: "Justificación para cada diferencia"
+    outputs:
+      - name: "comparison_table"
+        type: "character"
+        description: "Tabla en formato solicitado"
+    implementation: "methods/templates/method_comparison.R"

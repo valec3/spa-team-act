@@ -1,0 +1,126 @@
+# Dataset Catalog — spa-team-act
+# Registro maestro de todos los datasets disponibles en el repositorio.
+# Cada dataset se registra AQUI antes de ser usado en cualquier paper.
+
+version: "1.0"
+last_updated: "2024-07-18"
+
+datasets:
+
+  - id: cpv2017
+    name: "Censo de Población y Vivienda 2017"
+    source: "INEI — Instituto Nacional de Estadística e Informática"
+    url: "https://www.inei.gob.pe/"
+    license: "Uso público con atribución (INEI)"
+    format: "Stata (.dta)"
+    files:
+      - cpv_27.dta  # Censo completo
+      - enc_27.dta  # Encuesta de hogares
+    geography:
+      level: "distrital"
+      coverage: "Nacional (Perú)"
+      n_units: 1874
+      shapefile: "shapefiles/distrital/DISTRITOS.shp"
+    temporal:
+      year: 2017
+      type: "cross-sectional"
+    variables:
+      - category: "demográficos"
+        names: ["edad", "sexo", "estado_civil"]
+      - category: "vivienda"
+        names: ["material_paredes", "material_piso", "servicios_basicos"]
+      - category: "educación"
+        names: ["nivel_educativo", "asistencia_escolar"]
+      - category: "socioeconómicos"
+        names: ["ingreso", "ocupacion", "pobreza_monetaria"]
+    used_in:
+      - "papers/replica_lima"
+    notes: "Datos completos del censo. Archivos grandes (~1 GB cada .dta). Requiere memoria suficiente."
+    quality:
+      completeness: "Alta (censo nacional)"
+      missing_data: "Mínimo (<1%)"
+      known_issues: "Algunos UBIGEOS no coinciden con shapefile IGN 2023"
+
+  - id: ece2019
+    name: "Evaluación Censal de Estudiantes 2019"
+    source: "MINEDU — Oficina de Medición de la Calidad de los Aprendizajes"
+    url: "https://umc.minedu.gob.pe/"
+    license: "Uso público con atribución (MINEDU)"
+    format: "CSV / Stata"
+    files:
+      - ece2019_2sec.csv
+    geography:
+      level: "distrital"
+      coverage: "Nacional (Perú)"
+      n_units: 1781
+    temporal:
+      year: 2019
+      type: "cross-sectional"
+    variables:
+      - category: "logro educativo"
+        names: ["puntaje_lectura", "puntaje_matematica", "puntaje_ciencia"]
+      - category: "contexto"
+        names: ["gestion", "area", "ubigeo"]
+    used_in: []
+    notes: "ECE más reciente disponible. Datos originales del paper Alonso-Pastor et al. (2025)."
+    quality:
+      completeness: "Alta (censal)"
+      missing_data: "92 distritos sin datos (etiquetados 'Sin definir')"
+      known_issues: "No incluye nivel socioeconómico individual (solo puntajes)"
+
+  - id: poverty_map_2018
+    name: "Mapa de Pobreza Distrital 2018"
+    source: "INEI"
+    url: "https://www.inei.gob.pe/"
+    license: "Uso público con atribución (INEI)"
+    format: "CSV"
+    files:
+      - pobreza_distrital_2018.csv
+    geography:
+      level: "distrital"
+      coverage: "Nacional (Perú)"
+      n_units: 1874
+    temporal:
+      year: 2018
+      type: "cross-sectional"
+    variables:
+      - category: "pobreza"
+        names: ["pobreza_total", "pobreza_extrema", "nbi"]
+      - category: "indicadores"
+        names: ["analfabetismo", "desnutricion", "acceso_agua", "acceso_electricidad"]
+    used_in:
+      - "papers/replica_lima"
+    notes: "Estimaciones de pobreza a nivel distrital usando métodos de área pequeña."
+    quality:
+      completeness: "Completo"
+      missing_data: "Ninguno reportado"
+      known_issues: "Estimaciones, no mediciones directas"
+
+  - id: shapefiles_distrital
+    name: "Shapefile Distrital INEI 2023"
+    source: "Instituto Geográfico Nacional (IGN) / INEI"
+    url: "https://www.inei.gob.pe/"
+    license: "Uso público con atribución"
+    format: "Shapefile (.shp)"
+    files:
+      - DISTRITOS.shp
+      - DISTRITOS.shx
+      - DISTRITOS.dbf
+      - DISTRITOS.prj
+    geography:
+      level: "distrital"
+      coverage: "Nacional (Perú)"
+      n_units: 1891
+    temporal:
+      year: 2023
+      type: "administrative"
+    variables:
+      - category: "geografía"
+        names: ["UBIGEO", "DISTRITO", "PROVINCIA", "DEPARTAMENTO", "geometry"]
+    used_in:
+      - "papers/replica_lima"
+    notes: "Capa vectorial oficial. Algunos UBIGEOS pueden no coincidir con datasets más antiguos."
+    quality:
+      completeness: "Completo (1891 distritos)"
+      missing_data: "Ninguno"
+      known_issues: "Un distrito insular sin vecinos espaciales (isla en Lago Titicaca)"
