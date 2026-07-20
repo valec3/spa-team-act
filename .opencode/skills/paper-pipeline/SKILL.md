@@ -53,8 +53,10 @@ metadata:
 │     │   Gate: ¿cero issues bloqueantes?                         │
 │     │                                                           │
 │     ├── [3.2] paper-review-language                             │
+│     │   ├── paper-ai-patterns (catalogo AI a evitar)            │
+│     │   ├── paper-humanize (burstiness, vocabulario, voz)       │
 │     │   Output: language_report.md                              │
-│     │   Gate: ¿cero issues bloqueantes?                         │
+│     │   Gate: ¿cero AI vocabulary + burstiness > 15?            │
 │     │                                                           │
 │     └── [3.3] paper-polish                                      │
 │         Output: polish_report.md + draft_v2.0.md                │

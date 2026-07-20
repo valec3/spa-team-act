@@ -39,6 +39,11 @@ paper-revision (ORQUESTADOR)
 │   ├── Claridad y concision
 │   ├── Gramatica y ortografia
 │   ├── Transiciones y fluidez entre parrafos
+│   ├── ★ ANTI-AI HUMANIZACION (paper-humanize + paper-ai-patterns) ★
+│   │   ├── Zero AI vocabulary (delve, tapestry, moreover, robust...)
+│   │   ├── Burstiness check (rango > 15 palabras entre oraciones)
+│   │   ├── Voice injection (preguntas retoricas, posicionamiento personal)
+│   │   └── Citation naturalization (narrativas, no solo parenteticas)
 │   └── Output: language_report.md + draft v1.2
 │
 └── [PASE 3] paper-polish
@@ -152,6 +157,9 @@ El orquestador consolida los reportes de todas las sub-skills:
 | Abstract dice "N = 200" y Metodo dice "N = 128" | paper-review-consistency |
 | "en el presente estudio se procedio a realizar" → redundante | paper-polish |
 | Titulo no contiene la variable dependiente | paper-polish |
+| "delve into", "moreover", "robust" → AI vocabulary | paper-humanize |
+| Oraciones uniformes (todas ~22 palabras) → baja burstiness | paper-humanize |
+| Sin preguntas retoricas ni voz personal en Discussion | paper-humanize |
 
 ## Code Examples
 

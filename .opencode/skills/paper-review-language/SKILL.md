@@ -28,13 +28,15 @@ metadata:
 ### Language Review Dimensions
 
 ```
-REVISION DE LENGUAJE — 5 dimensiones:
+REVISION DE LENGUAJE — 6 dimensiones:
 
 1. TONO ACADEMICO: formalidad, precision, objetividad
 2. CLARIDAD: ¿se entiende a la primera lectura?
 3. CONCISION: sin palabras innecesarias ni redundancias
 4. GRAMATICA: concordancia, puntuacion, ortografia
 5. FLUIDEZ: transiciones, variacion de longitud, ritmo
+6. ANTI-AI HUMANIZACION: burstiness, vocabulario natural, voz personal
+   → Delega en paper-humanize y paper-ai-patterns para chequeos especializados
 ```
 
 ### Academic Tone Checklist
@@ -229,6 +231,9 @@ paper-review-consistency (PASE 1) → v1.1
   ▼
 ★ paper-review-language (PASE 2) → v1.2 ★
   │
+  ├── paper-ai-patterns (catalogo de patrones a evitar)
+  └── paper-humanize (burstiness, vocabulario, voz personal)
+  │
   ▼
 paper-polish (PASE 3) → v2.0
 ```
@@ -236,7 +241,8 @@ paper-polish (PASE 3) → v2.0
 ## Rules for This Project
 
 1. **Corregir solo lenguaje, no contenido.** Si el contenido es incorrecto, marcarlo pero no cambiarlo (eso es consistency).
-2. **Tono impersonal.** Preferir "se encontro" sobre "encontramos".
+2. **Tono impersonal balanceado.** Preferir "se encontro" en Results; permitir "we" en Discussion para posicionamiento.
 3. **Eliminar redundancias sin piedad.** Cada palabra debe ganarse su lugar.
 4. **Oraciones <30 palabras.** Si es mas larga, dividir.
 5. **Transiciones explicitas.** Cada parrafo debe conectar con el anterior y el siguiente.
+6. **Anti-AI check obligatorio.** Antes de pasar a polish, verificar: zero AI vocabulary, burstiness > 15, al menos 2 marcadores humanos en Discussion.

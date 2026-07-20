@@ -10,6 +10,8 @@
       "paper-revision",
       "paper-review-consistency",
       "paper-review-language",
+      "paper-humanize",
+      "paper-ai-patterns",
       "paper-polish",
       "paper-latex-generate",
       "paper-latex",
@@ -43,6 +45,10 @@
           "paper-review-consistency",
           "paper-review-language",
           "paper-polish"
+        ],
+        "revision_anti_ai": [
+          "paper-humanize",
+          "paper-ai-patterns"
         ]
       },
       "multi_paper": {

@@ -130,7 +130,7 @@ F1: paper-structure     → define estructura y word count
 F2: paper-draft         → ensambla primer borrador (draft_v1.md)
 F3: paper-revision      → orquesta 3 sub-pases de revisión:
   F3.1: paper-review-consistency → auditoría numérica y cross-refs
-  F3.2: paper-review-language    → tono académico y claridad
+  F3.2: paper-review-language    → tono academico, claridad + anti-AI humanizacion
   F3.3: paper-polish             → pulido final (draft_v2.0.md)
 F4: paper-latex-generate → genera paper/replica_lima.tex
 F5: paper-latex          → compila con xelatex → paper/replica_lima.pdf
@@ -159,7 +159,9 @@ Se cargan automáticamente cuando el contexto coincide.
 | F2 | `paper-draft` | Ensamblar primer borrador desde outputs |
 | F3 | `paper-revision` v2.0 | Orquestar ciclo de revisión (→ 3 sub-pases) |
 | F3.1 | `paper-review-consistency` | Auditar números, citas, cross-refs |
-| F3.2 | `paper-review-language` | Revisar tono académico, gramática, claridad |
+| F3.2 | `paper-review-language` | Revisar tono academico, gramatica, claridad, anti-AI |
+| F3.2a | `paper-humanize` | Humanizar texto: burstiness, vocabulario, voz personal |
+| F3.2b | `paper-ai-patterns` | Catalogo de patrones AI a evitar (Turnitin/GPTZero) |
 | F3.3 | `paper-polish` | Pulir fluidez, alinear Abstract-Conclusiones |
 | F4 | `paper-latex-generate` | Generar archivo .tex desde draft pulido |
 | F5 | `paper-latex` | Compilar LaTeX con XeLaTeX |
