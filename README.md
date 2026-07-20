@@ -1,92 +1,104 @@
-# spa-stat-group
+# Spatial Autocorrelation of Multidimensional Socioeconomic Deprivation across Metropolitan Lima, Peru
 
-> Réplica metodológica: Alonso-Pastor, Olaya Acosta & Calmet (2025). *Segregación educativa y desigualdad social en el Perú.* REICE 23(1). https://doi.org/10.15366/reice2025.23.1.001
+> Maye Mamani, V.R.; Mulluni Candia, J.J.; Maquera, J.S.E.; Choque Zuniga, C.N.  
+> Universidad Nacional del Altiplano — Facultad de Ingenieria Estadistica e Informatica, Puno, Peru
 
-## ¿De qué se trata?
+## About
 
-**Estudio de réplica metodológica.** Reimplementamos los métodos de análisis espacial del paper original (Moran Global, LISA, scatterplot de Moran) con los mismos parámetros — Queen contiguity orden 1, 999 permutaciones Monte Carlo, α = 0.05 — pero sobre **datos distintos**: el Mapa de Pobreza Distrital 2018 del INEI para 128 distritos del departamento de Lima.
+This repository contains the data, code, and manuscript for the paper
+**"Spatial Autocorrelation of Multidimensional Socioeconomic Deprivation across
+Metropolitan Lima, Peru: Evidence from Census Data."**
 
-**Esto NO es plagio ni copia textual.** Replicamos los MÉTODOS, no la redacción. Escribimos nuestro propio análisis citando siempre la fuente.
+We analyze spatial clustering of socioeconomic deprivation across 128 districts
+of Metropolitan Lima using Peru's 2017 National Population and Housing Census
+(CPV 2017). A composite Socioeconomic Level Index (SELI) is constructed via PCA
+and analyzed with Global Moran's I and LISA statistics (Queen contiguity order 1,
+999 Monte Carlo permutations).
 
-## Resultados principales
+## Results
 
-| Variable | I de Moran | Z | p (MC) |
+| Variable | Moran's I | Z | p (MC) |
 |---|---|---|---|
-| NSE (vía PCA) | 0.5296 | 9.45 | 0.000 |
-| Pobreza 2013 | 0.5300 | 9.44 | 0.000 |
-| ECE Lengua | 0.1063 | 2.01 | 0.042 |
-| ECE Matemáticas | 0.1774 | 3.26 | 0.004 |
+| SELI (PCA) | 0.5296 | 9.45 | .001 |
+| Poverty 2013 | 0.5300 | 9.44 | .001 |
+| ECE Mathematics | 0.1774 | 3.26 | .004 |
+| ECE Language | 0.1063 | 2.01 | .050 |
 
-→ Documento completo: [`paper/replica_lima.pdf`](paper/replica_lima.pdf) (8 páginas, LaTeX)
+**LISA clusters (SELI):** High-High 6.3% (central Lima), Low-Low 13.3% (periphery),
+Not significant 79.7%.
 
-## Estructura
+→ Full paper: [`papers/spatial_poverty_lima/paper.pdf`](papers/spatial_poverty_lima/paper.pdf)
+
+## Structure
 
 ```
-spa-stat-group/
-├── README.md
-├── AGENT.md
-├── .gitignore
+├── code/                  Analysis scripts
+│   ├── 01_carga.R         Load data, aggregate to district, PCA for SELI
+│   ├── 02_moran.R         Global Moran's I + LISA + scatterplots + maps
+│   └── METHODS.yml        Method registry
 ├── data/
-│   ├── raw/          ← cpv_27.dta + enc_27.dta (NO versionados, bajar de INEI)
-│   │   └── README.md    Instrucciones de descarga
-│   ├── geo/          ← Shapefile distrital INEI 2023 (1.891 distritos)
-│   │   └── README.md
-│   └── processed/    ← shp_distrital.rds (generado por 01_carga.R)
-├── src/
-│   ├── 01_carga.R    ← Carga datos, agrega a distrito, construye NSE vía PCA
-│   └── 02_moran.R    ← Moran I Global + Local, LISA, scatterplots, mapas
+│   ├── catalog.yml        Dataset catalog (sources, variables, licenses)
+│   ├── raw/               Raw census data (cpv_27.dta, enc_27.dta)
+│   ├── geo/               District shapefile (INEI 2023)
+│   └── processed/         Derived data (shp_distrital.rds)
+├── papers/
+│   └── spatial_poverty_lima/
+│       ├── paper.tex      LaTeX source (Springer format)
+│       └── paper.pdf      Compiled PDF
+├── docs/
+│   └── referencias/       Reference PDFs + referencias.bib (22 entries)
 ├── results/
-│   ├── figures/      ← 4 PNGs (scatterplots + mapas LISA)
-│   └── tables/       ← cuadro1_moran_lima.csv
-├── paper/
-│   ├── replica_lima.tex
-│   └── replica_lima.pdf
-└── docs/
-    ├── metodologia-original.md   ← Parámetros exactos del paper original
-    ├── referencias.md
-    ├── decision-datos.md         ← Opciones de datos evaluadas
-    └── original/                 ← PDF + txt del paper original
+│   ├── figures/           Moran scatterplots + LISA maps (4 PNGs)
+│   └── tables/            Global Moran's I results (CSV)
+└── README.md
 ```
 
-## Stack
+## Reproducibility
 
-- **Lenguaje**: R 4.4+
-- **Paquetes**: `sf`, `spdep`, `ggplot2`, `dplyr`, `haven`, `tidyr`
-- **LaTeX**: XeLaTeX (MiKTeX)
+### Requirements
 
-## Cómo reproducir
+- **R** 4.4+ with packages: `sf`, `spdep`, `ggplot2`, `dplyr`, `haven`, `tidyr`, `psych`
+- **LaTeX**: MiKTeX or TeX Live (for PDF compilation)
+- **Data**: CPV 2017 census files from INEI (see `data/raw/README.md`)
+
+### Quick start
 
 ```bash
-# 1. Clonar el repo
+# 1. Clone
 git clone https://github.com/valec3/spa-team-act.git
 cd spa-team-act
 
-# 2. Descargar datos del INEI (ver data/raw/README.md)
-#    Colocar cpv_27.dta y enc_27.dta en data/raw/
+# 2. Download data from INEI and place in data/raw/
+#    Required: cpv_27.dta, enc_27.dta
+#    See: data/raw/README.md
 
-# 3. Instalar paquetes R (solo la primera vez)
-Rscript -e "install.packages(c('sf','spdep','ggplot2','dplyr','haven','tidyr'), repos='https://cran.r-project.org')"
+# 3. Install R packages
+Rscript -e "install.packages(c('sf','spdep','ggplot2','dplyr','haven','tidyr','psych'), repos='https://cran.r-project.org')"
 
-# 4. Ejecutar pipeline
-Rscript src/01_carga.R    # ~2 min (carga 1 GB + PCA)
-Rscript src/02_moran.R    # ~30 seg (Moran + LISA + mapas)
+# 4. Run analysis (~3 min)
+Rscript code/01_carga.R    # Load + aggregate + PCA
+Rscript code/02_moran.R    # Moran I + LISA + figures
 
-# 5. Compilar paper (opcional)
-cd paper
-xelatex replica_lima.tex
-xelatex replica_lima.tex  # segunda pasada para referencias
+# 5. Compile paper
+cd papers/spatial_poverty_lima
+pdflatex paper.tex
+pdflatex paper.tex         # second pass for references
 ```
 
-Todas las rutas son **relativas** — el pipeline funciona desde cualquier máquina clonando el repo.
+All paths are **relative** — the pipeline runs from any machine after cloning.
 
-## Reglas no negociables
+## Parameters
 
-1. **Se replican MÉTODOS, nunca texto.** La redacción es original.
-2. **Se cita la fuente** siempre que se mencionan sus métodos o resultados.
-3. **Los datos son públicos** (INEI) y están documentados en `data/raw/README.md`.
-4. **Reproducibilidad total**: scripts versionados, rutas relativas, parámetros declarados.
-5. **Transparencia** sobre qué se replicó y qué se adaptó.
+| Parameter | Value |
+|---|---|
+| Spatial weights | Queen contiguity, order 1, row-standardized |
+| Monte Carlo permutations | 999 |
+| Significance level | α = 0.05 |
+| PCA rotation | Varimax |
+| Component retention | Eigenvalue > 1.0 |
+| Random seed | 20240101 |
+| N (districts) | 128 (Department of Lima) |
 
-## Licencia
+## License
 
-Código: MIT. Datos: según licencia INEI. Texto: CC-BY 4.0.
+Code: MIT. Data: INEI public use with attribution. Text: CC-BY 4.0.
